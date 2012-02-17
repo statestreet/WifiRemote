@@ -20,13 +20,14 @@ public class BaiduReader {
 //			System.getProperties().put("socksProxyPort",proxyPort); 
 
 			InetSocketAddress socketAddress = new InetSocketAddress(
-					"localhost", 9999);
+					"localhost", 1234);
 			// step1:打开连接
 			channel = SocketChannel.open(socketAddress);
 			channel.configureBlocking (false); // nonblocking 
 			println(channel.isBlocking());
 			// step2:发送请求，使用GBK编码
-			channel.write(charset.encode("GET " + "/ HTTP/1.1" + "\r\n\r\n"));
+			
+//			channel.write(charset.encode("GET " + "/ HTTP/1.1" + "\r\n\r\n"));
 			// step3:读取数据
 			ByteBuffer buffer = ByteBuffer.allocate(1024);// 创建1024字节的缓冲
 			while (channel.read(buffer) != -1) {
