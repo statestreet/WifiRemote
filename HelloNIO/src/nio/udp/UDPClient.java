@@ -9,14 +9,14 @@ import  java.nio.charset.Charset;
 import  java.util.Iterator; 
 import  java.util.Set; 
 
-public class  UDPClient  extends  Thread  { 
-     public  void  run () { 
+public class  UDPClient { 
+     public static void  main (String[] args) { 
          DatagramChannel channel =  null ; 
          Selector selector =  null ; 
          try  { 
              channel = DatagramChannel.open () ; 
              channel.configureBlocking ( false ) ; 
-             SocketAddress sa =  new  InetSocketAddress ( "localhost" ,  5057 ) ; 
+             SocketAddress sa =  new  InetSocketAddress ( "localhost" ,  55555 ) ; 
              channel.connect ( sa ) ; 
          }  catch  ( Exception e ) { 
              e.printStackTrace () ; 
@@ -62,4 +62,6 @@ public class  UDPClient  extends  Thread  {
          } 
 
      } 
+     
+     
 }

@@ -19,7 +19,7 @@ public class UDPServer extends Thread {
 			DatagramChannel channel = DatagramChannel.open();
 			DatagramSocket socket = channel.socket();
 			channel.configureBlocking(false);
-			socket.bind(new InetSocketAddress(5057));
+			socket.bind(new InetSocketAddress(55555));
 
 			selector = Selector.open();
 			channel.register(selector, SelectionKey.OP_READ);
