@@ -25,7 +25,7 @@ public class  UDPClient {
          try  { 
              selector = Selector.open () ; 
              channel.register ( selector, SelectionKey.OP_READ ) ; 
-             channel.write ( Charset.defaultCharset () .encode ( "Tell me your time" )) ; 
+             channel.write ( Charset.forName("UTF-8") .encode ( "你好啊妹子" )) ; 
          }  catch  ( Exception e ) { 
              e.printStackTrace () ; 
          } 
@@ -35,8 +35,8 @@ public class  UDPClient {
              try  { 
                  int  eventsCount = selector.select () ; 
                  if  ( eventsCount >  0 ) { 
-                     Set selectedKeys = selector.selectedKeys () ; 
-                     Iterator iterator = selectedKeys.iterator () ; 
+                     Set<SelectionKey> selectedKeys = selector.selectedKeys () ; 
+                     Iterator<SelectionKey> iterator = selectedKeys.iterator () ; 
                      while  ( iterator.hasNext ()) { 
                          SelectionKey sk =  ( SelectionKey )  iterator.next () ; 
                          iterator.remove () ; 

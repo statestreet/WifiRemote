@@ -32,8 +32,8 @@ public class UDPServer extends Thread {
 			try {
 				int eventsCount = selector.select();
 				if (eventsCount > 0) {
-					Set selectedKeys = selector.selectedKeys();
-					Iterator iterator = selectedKeys.iterator();
+					Set<SelectionKey> selectedKeys = selector.selectedKeys();
+					Iterator<SelectionKey> iterator = selectedKeys.iterator();
 					while (iterator.hasNext()) {
 						SelectionKey sk = (SelectionKey) iterator.next();
 						iterator.remove();
@@ -45,16 +45,20 @@ public class UDPServer extends Thread {
 							byteBuffer.flip();
 
 							// 测试：通过将收到的ByteBuffer首先通过缺省的编码解码成CharBuffer 再输出
-							CharBuffer charBuffer = Charset.defaultCharset()
+							CharBuffer charBuffer = Charset.forName("UTF-8")
 									.decode(byteBuffer);
 							System.out.println("receive message:"
 									+ charBuffer.toString());
 							byteBuffer.clear();
 
 							String echo = "This is the reply message from 服务器。";
-							ByteBuffer buffer = Charset.defaultCharset()
+							ByteBuffer buffer = Charset.forName("UTF-8")
 									.encode(echo);
-							datagramChannel.write(buffer);
+//							datagramChannel = DatagramChannel.open();
+//							datagramChannel.connect(sa);
+//							datagramChannel.isConnected();
+							while(datagramChannel.isConnected())
+								datagramChannel.write(buffer);
 						}
 					}
 				}
